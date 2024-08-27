@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:table/table.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -19,19 +20,12 @@ class _MyHomePageState extends State<MyHomePage> {
         _num = int.parse(_controller.text);
         _table = [];
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 10; i >= 1; i--) {
           _table.add("$_num x $i= ${_num * i}");
         }
       } catch (e) {
         _table = ['invalid input'];
       }
-    });
-  }
-
-  void _squareroot() {
-    setState(() {
-      _num = int.parse(_controller.text);
-      
     });
   }
 
@@ -68,6 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 print(_controller);
                 _generate();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Huz(list: _table)));
               },
               child: Text('generate'),
             ),
@@ -76,9 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     shrinkWrap: true,
                     itemCount: _table.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(_table[index]),
-                      );
+                      return Text(_table[index]);
                     })),
           ],
         ),
